@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from "react";
+import ChipList from "./ChipList/ChipList";
 import './App.css';
 
-function App() {
+const sample = [
+  { label: "ReactJS" },
+  { label: "TypeScript" },
+  { label: "PerformanceOptimization" },
+  { label: "Memoization" },
+  { label: "HooksMastery" },
+];
+
+export default function App() {
+  const [counter, setCounter] = useState(0);
+
+  // Force parent re-render every 3s (simulate live updates or context changes)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCounter((c) => c + 1);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: "16px" }}>
+      <h2>Parent re-renders: {counter}</h2>
+
+      <ChipList chips={sample} maxChips={3} maxTextLength={10} />
     </div>
   );
 }
-
-export default App;
