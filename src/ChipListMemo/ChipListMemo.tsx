@@ -15,7 +15,7 @@ import React, {
   useCallback,
   useRef,
 } from "react";
-import styles from "./ChipList.module.css";
+import styles from "./ChipListMemo.module.css";
 
 const ELLIPSIS = "\u2026";
 
@@ -32,7 +32,9 @@ type ChipListProps = {
 
 let renderCount = 0;
 
-const ChipList = function ChipList({
+// Higher Order Component that wraps a functional component to memoize its render output
+// It prevents the component from re-rendering if its props haven't changed or just shallowly changed
+const ChipListMemo = React.memo(function ChipListMemo({
   chips = [],
   maxChips,
   maxTextLength,
@@ -54,21 +56,17 @@ const ChipList = function ChipList({
     });
   }, [chips, maxChips, maxTextLength]);
 
-  // TBC useReducer — Optional example for state transitions (analytics, debug)
-  // const [renderCount, incrementRenderCount] = useReducer((x) => x + 1, 0);
   const mountCount = useRef(0);
 
   // useEffect — Side effects (logging, sync with parent)
   useEffect(() => {
-    //incrementRenderCount();
     renderCount++;
     console.log(
-      `%c[ChipList rendered #${renderCount}]`,
+      `%c[ChipListMemo rendered #${renderCount}]`,
       "color: #1eff31ff"
     );
   });
 
-  // incrementRenderCount();
 
   // useCallback — Stable handler for any events (no re-creation)
   const refreshVisible = useCallback(() => {
@@ -83,12 +81,11 @@ const ChipList = function ChipList({
     const now = Date.now();
     const diff = now - lastRenderTime.current;
     console.log(
-      `%c[ChipList mounted #${mountCount.current}] took ${diff}ms since last render`,
+      `%c[ChipListMemo mounted #${mountCount.current}] took ${diff}ms since last render`,
       "color: #1E90FF"
     );
     lastRenderTime.current = now;
   }, []);
-
 
   // Defensive: handle empty or invalid props
   if (!Array.isArray(chips) || chips.length === 0) {
@@ -119,6 +116,6 @@ const ChipList = function ChipList({
       )}
     </section>
   );
-};
+});
 
-export default ChipList;
+export default ChipListMemo;

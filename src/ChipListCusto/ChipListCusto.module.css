@@ -1,7 +1,6 @@
-/* ChipList.css - Styles for ChipList component */
-
-.chip-list {
-  border: 2px solid #007bff; /* Blue border to visualize component space */
+.chipList {
+  border: 2px solid #ff1e00; 
+  margin: 8px;
   padding: 8px;
   border-radius: 8px;
   display: flex;

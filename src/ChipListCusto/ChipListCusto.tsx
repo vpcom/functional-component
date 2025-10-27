@@ -13,29 +13,34 @@ import React, {
   useEffect,
   useMemo,
   useCallback,
-  useRef,
+  useRef
 } from "react";
-import styles from "./ChipList.module.css";
+import styles from "./ChipListCusto.module.css";
 
 const ELLIPSIS = "\u2026";
 
 // Strict type definitions
-type Chip = {
+interface Chip {
   label: string;
-};
+}
 
-type ChipListProps = {
+interface ChipListProps {
   chips: Chip[];
   maxChips?: number;
   maxTextLength?: number;
-};
+  theme?: string;
+}
 
 let renderCount = 0;
 
-const ChipList = function ChipList({
+// Higher Order Component that wraps a functional component to memoize its render output
+// It prevents the component from re-rendering if its props haven't changed or just shallowly changed
+const ChipListCusto = React.memo(function ChipListCusto({
+// const ChipList = function ChipList({
   chips = [],
   maxChips,
   maxTextLength,
+  theme = "light",
 }: ChipListProps) {
 
   // useState — Local UI state
@@ -54,8 +59,6 @@ const ChipList = function ChipList({
     });
   }, [chips, maxChips, maxTextLength]);
 
-  // TBC useReducer — Optional example for state transitions (analytics, debug)
-  // const [renderCount, incrementRenderCount] = useReducer((x) => x + 1, 0);
   const mountCount = useRef(0);
 
   // useEffect — Side effects (logging, sync with parent)
@@ -63,7 +66,7 @@ const ChipList = function ChipList({
     //incrementRenderCount();
     renderCount++;
     console.log(
-      `%c[ChipList rendered #${renderCount}]`,
+      `%c[ChipListCusto rendered #${renderCount}]`,
       "color: #1eff31ff"
     );
   });
@@ -83,17 +86,17 @@ const ChipList = function ChipList({
     const now = Date.now();
     const diff = now - lastRenderTime.current;
     console.log(
-      `%c[ChipList mounted #${mountCount.current}] took ${diff}ms since last render`,
+      `%c[ChipListCusto mounted #${mountCount.current}] took ${diff}ms since last render`,
       "color: #1E90FF"
     );
     lastRenderTime.current = now;
+    //incrementRenderCount(); TBC
   }, []);
-
 
   // Defensive: handle empty or invalid props
   if (!Array.isArray(chips) || chips.length === 0) {
     return (
-      <section className={`${styles.chipList} light`}>
+      <section className={`${styles.chipList} ${theme}`}>
         <div className={styles.empty}>No chips available</div>
       </section>
     );
@@ -103,7 +106,7 @@ const ChipList = function ChipList({
   const exceeding = Math.max(chips.length - (maxChips ?? chips.length), 0);
 
   return (
-    <section className={`${styles.chipList} light`}>
+    <section className={`${styles.chipList} ${theme}`}>
       {visibleChips.map((label, index) => (
         <div
           key={index}
@@ -119,6 +122,7 @@ const ChipList = function ChipList({
       )}
     </section>
   );
-};
+// };
+});
 
-export default ChipList;
+export default ChipListCusto;
