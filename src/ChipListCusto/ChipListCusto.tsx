@@ -15,7 +15,7 @@ import React, {
   useCallback,
   useRef
 } from "react";
-import styles from "./ChipListCusto.module.css";
+import styles from "./ChipListCusto.module.scss";
 
 const ELLIPSIS = "\u2026";
 
@@ -106,7 +106,7 @@ const ChipListCusto = React.memo(function ChipListCusto({
   const exceeding = Math.max(chips.length - (maxChips ?? chips.length), 0);
 
   return (
-    <section className={`${styles.chipList} ${theme}`}>
+    <section className={`${styles.chipListCusto} ${theme}`}>
       {visibleChips.map((label, index) => (
         <div
           key={index}

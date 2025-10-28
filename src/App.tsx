@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ChipList from "./ChipList/ChipList";
-import './App.css';
+import './App.scss';
 import ChipListMemo from "./ChipListMemo/ChipListMemo";
 import ChipListCusto from "./ChipListCusto/ChipListCusto";
 
@@ -46,6 +46,7 @@ export default function App() {
         />
         <button onClick={handleAddChip}>Add Chip</button>
       </div>
+      <h2>Children components: </h2>
       <ChipList chips={chips} maxChips={3} maxTextLength={10} />
       <ChipListMemo chips={chips} maxChips={3} maxTextLength={10} />
       <ChipListCusto chips={chips} maxChips={3} maxTextLength={10} theme="dark" />

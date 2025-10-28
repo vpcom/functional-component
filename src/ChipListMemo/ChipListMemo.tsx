@@ -15,7 +15,7 @@ import React, {
   useCallback,
   useRef,
 } from "react";
-import styles from "./ChipListMemo.module.css";
+import styles from "./ChipListMemo.module.scss";
 
 const ELLIPSIS = "\u2026";
 
@@ -100,7 +100,7 @@ const ChipListMemo = React.memo(function ChipListMemo({
   const exceeding = Math.max(chips.length - (maxChips ?? chips.length), 0);
 
   return (
-    <section className={`${styles.chipList} light`}>
+    <section className={`${styles.chipListMemo} light`}>
       {visibleChips.map((label, index) => (
         <div
           key={index}

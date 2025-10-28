@@ -1,5 +1,5 @@
 /**
- * STATE-OF-THE-ART FUNCTIONAL COMPONENT
+ * FUNCTIONAL COMPONENT
  * Demonstrates:
  * - All core hooks (useState, useEffect, useCallback, useMemo, useRef)
  * - Clean structure
@@ -15,7 +15,7 @@ import React, {
   useCallback,
   useRef,
 } from "react";
-import styles from "./ChipList.module.css";
+import styles from "./ChipList.module.scss";
 
 const ELLIPSIS = "\u2026";
 
@@ -54,21 +54,17 @@ const ChipList = function ChipList({
     });
   }, [chips, maxChips, maxTextLength]);
 
-  // TBC useReducer — Optional example for state transitions (analytics, debug)
-  // const [renderCount, incrementRenderCount] = useReducer((x) => x + 1, 0);
   const mountCount = useRef(0);
 
-  // useEffect — Side effects (logging, sync with parent)
+  // useEffect
   useEffect(() => {
-    //incrementRenderCount();
     renderCount++;
     console.log(
       `%c[ChipList rendered #${renderCount}]`,
       "color: #1eff31ff"
     );
-  });
+  }); // No, [] to log every render
 
-  // incrementRenderCount();
 
   // useCallback — Stable handler for any events (no re-creation)
   const refreshVisible = useCallback(() => {
@@ -78,7 +74,7 @@ const ChipList = function ChipList({
   // useRef — Hold mutable, non-render-affecting values (e.g., render log)
   const lastRenderTime = useRef(Date.now());
 
-  // useEffect — Side effects (logging, sync with parent)
+  // useEffect — Logs time since last render
   useEffect(() => {
     const now = Date.now();
     const diff = now - lastRenderTime.current;
