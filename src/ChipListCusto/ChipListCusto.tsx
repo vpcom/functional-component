@@ -43,6 +43,8 @@ const ChipListCusto = React.memo(function ChipListCusto({
   theme = "light",
 }: ChipListProps) {
 
+    console.log(theme);
+
   // useState — Local UI state
   const [visibleCount, setVisibleCount] = useState<number>(() => {
     return Math.min(chips.length, maxChips ?? chips.length);
@@ -63,6 +65,7 @@ const ChipListCusto = React.memo(function ChipListCusto({
 
   // useEffect — Side effects (logging, sync with parent)
   useEffect(() => {
+    console.log(theme);
     //incrementRenderCount();
     renderCount++;
     console.log(
@@ -83,6 +86,7 @@ const ChipListCusto = React.memo(function ChipListCusto({
 
   // useEffect — Side effects (logging, sync with parent)
   useEffect(() => {
+    console.log(theme);
     const now = Date.now();
     const diff = now - lastRenderTime.current;
     console.log(
@@ -96,7 +100,7 @@ const ChipListCusto = React.memo(function ChipListCusto({
   // Defensive: handle empty or invalid props
   if (!Array.isArray(chips) || chips.length === 0) {
     return (
-      <section className={`${styles.chipList} ${theme}`}>
+      <section className={`${styles.chipListCusto} ${theme}`}>
         <div className={styles.empty}>No chips available</div>
       </section>
     );

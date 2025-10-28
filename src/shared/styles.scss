@@ -1,0 +1,38 @@
+@mixin baseChipList {
+  margin: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.chip {
+  border: 1px solid #bbb;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.light .chip {
+  background-color: #aaa; // #f9f9f9;
+  color: #333;
+}
+
+.dark .chip {
+  background-color: #333;
+  color: #f9f9f9;
+}
+
+.empty {
+  font-style: italic;
+  opacity: 0.6;
+}
+
+.light .empty {
+  color: #555;
+}
+
+.dark .empty {
+  color: #aaa;
+}
