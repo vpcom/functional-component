@@ -106,11 +106,17 @@ const ChipListCusto = React.memo(function ChipListCusto({
     );
   }
 
+// Compute theme variables
+const themeVars = theme === 'dark' 
+  ? { '--chip-bg': '#333', '--chip-color': '#f9f9f9', '--empty-color': '#aaa' }
+  : { '--chip-bg': '#ffffff', '--chip-color': '#333', '--empty-color': '#555' };
+
+
   // Compute hidden chips count
   const exceeding = Math.max(chips.length - (maxChips ?? chips.length), 0);
 
   return (
-    <section className={`${styles.chipListCusto} ${theme}`}>
+    <section className={`${styles.chipListCusto} ${theme}`} style={themeVars as React.CSSProperties}>
       {visibleChips.map((label, index) => (
         <div
           key={index}

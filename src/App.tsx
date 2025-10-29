@@ -50,6 +50,7 @@ export default function App() {
       <ChipList chips={chips} maxChips={3} maxTextLength={10} />
       <ChipListMemo chips={chips} maxChips={3} maxTextLength={10} />
       <ChipListCusto chips={chips} maxChips={3} maxTextLength={10} theme="dark" />
+      <ChipListCusto chips={chips} maxChips={3} maxTextLength={10} />
     </div>
   );
 }
